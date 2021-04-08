@@ -198,7 +198,8 @@ for (let i = 0; i < recipesData.length; i++) {
     ingListsLi.appendChild(ingName);
     // second content for the collection item (icon, saving function...comes)
     const secCon = document.createElement('a');
-    secCon.classList.add('secondary-content');
+    secCon.classList.add('secondary-content', 'my-add-ing-btn');
+    secCon.setAttribute('onclick', 'addIngredient()');
     ingName.appendChild(secCon);
     // second content's icon which is inside the a tag above
     const saveIcon = document.createElement('i');
@@ -231,3 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var elems = document.querySelectorAll('.modal');
   var instances = M.Modal.init(elems, options);
 });
+
+const addIngredient = () => {
+  console.log('clicked!!!!!');
+};
