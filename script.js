@@ -117,7 +117,7 @@ const row = document.getElementById('cards');
 for (let i = 0; i < recipesData.length; i++) {
   // 1
   let colDiv = document.createElement('div');
-  colDiv.classList.add('col', 's12', 'm6', 'l4');
+  colDiv.classList.add('col', 's12', 'm6', 'l6', 'xl4');
   row.appendChild(colDiv);
   // 2
   const card = document.createElement('div');
@@ -155,7 +155,7 @@ for (let i = 0; i < recipesData.length; i++) {
   const action = document.createElement('div');
   action.classList.add('card-action', 'center-align', 'my-action');
   card.appendChild(action);
-  // 5-1
+  // 5-1-1
   const ingredientsA = document.createElement('a');
   ingredientsA.setAttribute('href', '#ingredients');
   ingredientsA.classList.add('modal-trigger');
@@ -170,19 +170,52 @@ for (let i = 0; i < recipesData.length; i++) {
   const modalContent = document.createElement('div');
   modalContent.classList.add('modal-content');
   ingModal.appendChild(modalContent);
-  // Inside ModalContent: title
-  const ingTitle = document.createElement('h4');
-  ingTitle.innerHTML = 'INGREDIENTS';
-  modalContent.appendChild(ingTitle);
+  //
+  // // Inside ModalContent: title
+  // const ingTitle = document.createElement('h4');
+  // ingTitle.innerHTML = 'Ingredients for ' + recipesData[i].title;
+  // modalContent.appendChild(ingTitle);
+  //
   // Inside ModalCOntetnt: Ingredients
   const ingListsUl = document.createElement('ul');
+  ingListsUl.classList.add('collection', 'with-header');
   modalContent.appendChild(ingListsUl);
+  // COllection header
+  const collHeader = document.createElement('li');
+  collHeader.classList.add('collection-header');
+  ingListsUl.appendChild(collHeader);
+  const collHeaderContent = document.createElement('h4');
+  collHeaderContent.innerHTML = 'Ingredients for ' + recipesData[i].title;
+  collHeader.appendChild(collHeaderContent);
+  // Collection items
   for (let j = 0; j < recipesData[i].ingredients.length; j++) {
     const ingListsLi = document.createElement('li');
-    ingListsLi.innerHTML = recipesData[i].ingredients[j];
+    ingListsLi.classList.add('collection-item');
     ingListsUl.appendChild(ingListsLi);
+    // first content for the collection item
+    const ingName = document.createElement('div');
+    ingName.innerHTML = recipesData[i].ingredients[j];
+    ingListsLi.appendChild(ingName);
+    // second content for the collection item (icon, saving function...comes)
+    const secCon = document.createElement('a');
+    secCon.classList.add('secondary-content');
+    ingName.appendChild(secCon);
+    // second content's icon which is inside the a tag above
+    const saveIcon = document.createElement('i');
+    saveIcon.classList.add('material-icons');
+    saveIcon.innerHTML = 'add_circle_outline';
+    secCon.appendChild(saveIcon);
   }
-  // 5-3
+  // modalFooter: close button
+  const modalFooter = document.createElement('div');
+  modalFooter.classList.add('modal-footer');
+  ingModal.appendChild(modalFooter);
+  // Inside modalFooter
+  const modalClose = document.createElement('a');
+  modalClose.classList.add('modal-close', 'btn', 'orange');
+  modalClose.innerHTML = 'Close';
+  modalFooter.appendChild(modalClose);
+  // 5-1-2
   const websiteA = document.createElement('a');
   websiteA.setAttribute('src', '#');
   websiteA.innerHTML = 'Recipe Website';
@@ -190,7 +223,8 @@ for (let i = 0; i < recipesData.length; i++) {
 }
 
 var options = {
-  opacity: 0.5,
+  opacity: 0.4,
+  outDuration: 350,
 };
 
 document.addEventListener('DOMContentLoaded', function () {
