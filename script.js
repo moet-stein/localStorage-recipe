@@ -3,31 +3,81 @@ const recipes = [
     id: 635521,
     title: 'Blueberry Pound Cake',
     image: 'https://spoonacular.com/recipeImages/635521-312x231.jpg',
+    ingredients: [
+      'blueberries',
+      'wheat flour',
+      'sugar',
+      'eggs',
+      'butter',
+      'milk',
+    ],
   },
   {
     id: 642595,
     title: "Farmer's Market Wild Mushroom Risotto",
     image: 'https://spoonacular.com/recipeImages/642595-312x231.jpg',
+    ingredients: [
+      'mushrooms',
+      'rice',
+      'cheese',
+      'salt',
+      'pepper',
+      'white wine',
+    ],
   },
   {
     id: 1095967,
     title: 'Easy 7 Layer Salad Side Dish',
     image: 'https://spoonacular.com/recipeImages/1095967-312x231.jpg',
+    ingredients: [
+      'lettuce',
+      'eggs',
+      'carrots',
+      'mayonnaise',
+      'onions',
+      'bacon',
+    ],
   },
   {
     id: 635520,
     title: 'Cherry Pie',
     image: 'https://spoonacular.com/recipeImages/635520-312x231.jpg',
+    ingredients: [
+      'cherries',
+      'pie sheet',
+      'vanilla',
+      'sugar',
+      'butter',
+      'eggs',
+      'peanuts butter',
+    ],
   },
   {
     id: 635524,
     title: 'Cheese Cake with Blueberry sauce',
     image: 'https://spoonacular.com/recipeImages/635524-312x231.jpg',
+    ingredients: [
+      'cream cheese',
+      'blueberries',
+      'sugar',
+      'gelatine',
+      'butter',
+      'milk',
+    ],
   },
   {
     id: 635542,
     title: 'Banana Muffins',
     image: 'https://spoonacular.com/recipeImages/635542-312x231.jpg',
+    ingredients: [
+      'bananas',
+      'butter',
+      'sugar',
+      'flour',
+      'eggs',
+      'mlik',
+      'baking powder',
+    ],
   },
 ];
 
@@ -107,12 +157,43 @@ for (let i = 0; i < recipesData.length; i++) {
   card.appendChild(action);
   // 5-1
   const ingredientsA = document.createElement('a');
-  ingredientsA.setAttribute('src', '#');
+  ingredientsA.setAttribute('href', '#ingredients');
+  ingredientsA.classList.add('modal-trigger');
   ingredientsA.innerHTML = 'Ingredients';
   action.appendChild(ingredientsA);
-  // 5-2
+  // Creating ingredients modal 5-2
+  const ingModal = document.createElement('div');
+  ingModal.classList.add('modal');
+  ingModal.setAttribute('id', 'ingredients');
+  action.appendChild(ingModal);
+  // Creating ingredients modal 5-2-1
+  const modalContent = document.createElement('div');
+  modalContent.classList.add('modal-content');
+  ingModal.appendChild(modalContent);
+  // Inside ModalContent: title
+  const ingTitle = document.createElement('h4');
+  ingTitle.innerHTML = 'INGREDIENTS';
+  modalContent.appendChild(ingTitle);
+  // Inside ModalCOntetnt: Ingredients
+  const ingListsUl = document.createElement('ul');
+  modalContent.appendChild(ingListsUl);
+  for (let j = 0; j < recipesData[i].ingredients.length; j++) {
+    const ingListsLi = document.createElement('li');
+    ingListsLi.innerHTML = recipesData[i].ingredients[j];
+    ingListsUl.appendChild(ingListsLi);
+  }
+  // 5-3
   const websiteA = document.createElement('a');
   websiteA.setAttribute('src', '#');
   websiteA.innerHTML = 'Recipe Website';
   action.appendChild(websiteA);
 }
+
+var options = {
+  opacity: 0.5,
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+  var elems = document.querySelectorAll('.modal');
+  var instances = M.Modal.init(elems, options);
+});
